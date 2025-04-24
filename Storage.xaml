@@ -1,0 +1,33 @@
+﻿<Page x:Class="Logistics.Storage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Logistics"
+      mc:Ignorable="d" 
+      d:DesignHeight="740" d:DesignWidth="1000"
+      Title="Storage" >
+
+    <Grid Background="White">
+        <StackPanel Margin="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ComboBox Margin="5" Grid.Row="1"></ComboBox>
+                <TextBox Grid.Column = "1" Margin="5" Grid.Row="1"></TextBox>
+                <Button Grid.Column = "2" Margin="5" Grid.Row="1">Изменить</Button>
+                <TextBlock Margin="5">Выберите Склад</TextBlock>
+                <TextBlock Grid.Column = "1" Margin="5">Введите нужное количество угля</TextBlock>
+            </Grid>
+            <Button Grid.Column = "4" Margin="5">Обновить график</Button>
+        </StackPanel>
+
+    </Grid>
+</Page>
