@@ -55,12 +55,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AcceptanceOfWagon.xaml.cs">
+      <DependentUpon>AcceptanceOfWagon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateOfSostav.xaml.cs">
+      <DependentUpon>CreateOfSostav.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DispatchOfWagons.xaml.cs">
+      <DependentUpon>DispatchOfWagons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingOfWagons.xaml.cs">
+      <DependentUpon>LoadingOfWagons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Storage.xaml.cs">
       <DependentUpon>Storage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WayBill.xaml.cs">
+      <DependentUpon>WayBill.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AcceptanceOfWagon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateOfSostav.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DispatchOfWagons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingOfWagons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WayBill.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

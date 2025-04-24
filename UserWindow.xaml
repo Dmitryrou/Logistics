@@ -25,11 +25,11 @@
                 <StackPanel Grid.Column="0" Margin="15">
                     <Button Name="btn_storage" Content="Склад" Margin="15" Click="btn_storage_Click"/>
                     <Button Name="btn_Report" Content="Список отчетов" Margin="15"/>
-                    <Button Name="btn_waybill" Content="Создание накладной" Margin="15"/>
-                    <Button Name="btn_acceptance" Content="Приемка вагонов" Margin="15"/>
-                    <Button Name="btn_loading" Content="Погрузка вагонов" Margin="15"/>
-                    <Button Name="btn_sost" Content="Создание составов" Margin="15"/>
-                    <Button Name="btn_dispatch" Content="Отправка составов" Margin="15"/>
+                    <Button Name="btn_waybill" Content="Создание накладной" Margin="15" Click="btn_waybill_Click"/>
+                    <Button Name="btn_acceptance" Content="Приемка вагонов" Margin="15" Click="btn_acceptance_Click"/>
+                    <Button Name="btn_loading" Content="Погрузка вагонов" Margin="15" Click="btn_loading_Click"/>
+                    <Button Name="btn_Cteate_sost" Content="Создание составов" Margin="15" Click="btn_CreateSost_Click"/>
+                    <Button Name="btn_dispatch" Content="Отправка составов" Margin="15" Click="btn_dispatch_Click"/>
                     <Button Name="btn_copy" Content="Резервное копирование" Margin="15"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="10">

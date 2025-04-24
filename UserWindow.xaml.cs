@@ -26,13 +26,37 @@ namespace Logistics
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
-            UserWindow userWindow = new UserWindow();
-            userWindow.Close();
+            Close();
         }
 
         private void btn_storage_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new Storage());
+        }
+
+        private void btn_waybill_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new WayBill());
+        }
+
+        private void btn_acceptance_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new AcceptanceOfWagon());
+        }
+
+        private void btn_loading_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new LoadingOfWagons());
+        }
+
+        private void btn_CreateSost_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new CreateOfSostav());
+        }
+
+        private void btn_dispatch_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new DispatchOfWagons());
         }
     }
 }
