@@ -9,9 +9,9 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Margin="5">Введите логин</TextBlock>
-            <TextBox Margin="5" Width="300"></TextBox>
+            <TextBox Margin="5" Width="300" Name="Login_txb"></TextBox>
             <TextBlock Margin="5">Введите пароль</TextBlock>
-            <TextBox Margin="5"></TextBox>
+            <PasswordBox Margin="5" Name="Password_Pas"></PasswordBox>
             <Button Margin="5" Click="Button_Click_Auth">Вход</Button>
         </StackPanel>
     </Grid>

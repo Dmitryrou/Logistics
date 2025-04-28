@@ -31,7 +31,7 @@ namespace Logistics
 
         private void btn_storage_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new Storage());
+            frm_HomePage.NavigationService.Navigate(new Sklad());
         }
 
         private void btn_waybill_Click(object sender, RoutedEventArgs e)

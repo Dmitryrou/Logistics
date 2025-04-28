@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,28 @@ namespace Logistics
 
         private void Button_Click_Auth(object sender, RoutedEventArgs e)
         {
-            UserWindow userWindow = new UserWindow();
-            userWindow.Show();
-            this.Close();
+            string login = Login_txb.Text.Trim();
+            string password = Password_Pas.Password.Trim();
+
+            ObjectResult<Nullable<int>> id = uk_koks_Entities.GetContext().CheckPassword(login, password);
+            // Извлекаем значение
+            Nullable<int> nullableInt = id.FirstOrDefault();
+
+            // Преобразуем в int, если значение не null
+            int result = nullableInt ?? 0;
+
+            //Авторизация
+            if (result == 0) 
+            {
+                MessageBox.Show("Вы ввели неверный пароль");
+            }
+            else
+            {
+                UserWindow userWindow = new UserWindow();
+                userWindow.Show();
+                this.Close();
+            }
+
         }
     }
 }

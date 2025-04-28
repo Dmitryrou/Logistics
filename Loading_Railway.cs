@@ -24,7 +24,7 @@ namespace Logistics
     
         public virtual Railway Railway { get; set; }
         public virtual Station_Loading Station_Loading { get; set; }
-        public virtual Storage Storage { get; set; }
+        public virtual Storage_Accounting Storage_Accounting { get; set; }
         public virtual User User { get; set; }
     }
 }

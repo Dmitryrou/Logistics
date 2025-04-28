@@ -77,73 +77,73 @@
       <DependentUpon>LoadingOfWagons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Loading_Railway.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelBD.Context.cs">
+    <Compile Include="ModelDB-UK-KOKS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.Context.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelBD.cs">
+    <Compile Include="ModelDB-UK-KOKS.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelBD.Designer.cs">
+    <Compile Include="ModelDB-UK-KOKS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.edmx</DependentUpon>
     </Compile>
     <Compile Include="Nomenclature.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Railway.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Railway_Car.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Railway_Railway_Car.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="SelectRailWay_Result.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Sending_Railway.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sklad.xaml.cs">
+      <DependentUpon>Sklad.xaml</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Station_Distination.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Station_Loading.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="Status_Car.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Storage.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Storage.xaml.cs">
-      <DependentUpon>Storage.xaml</DependentUpon>
+    <Compile Include="Storage_Accounting.cs">
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User_role.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>ModelDB-UK-KOKS.tt</DependentUpon>
     </Compile>
     <Compile Include="WayBill.xaml.cs">
       <DependentUpon>WayBill.xaml</DependentUpon>
@@ -176,7 +176,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Storage.xaml">
+    <Page Include="Sklad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,12 +207,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ModelBD.edmx">
+    <EntityDeploy Include="ModelDB-UK-KOKS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelDB-UK-KOKS.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelBD.edmx.diagram">
-      <DependentUpon>ModelBD.edmx</DependentUpon>
+    <None Include="ModelDB-UK-KOKS.edmx.diagram">
+      <DependentUpon>ModelDB-UK-KOKS.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -224,19 +224,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelBD.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelBD.Context.cs</LastGenOutput>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-    </Content>
-    <Content Include="ModelBD.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-      <LastGenOutput>ModelBD.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ModelDB-UK-KOKS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDB-UK-KOKS.edmx</DependentUpon>
+      <LastGenOutput>ModelDB-UK-KOKS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelDB-UK-KOKS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDB-UK-KOKS.edmx</DependentUpon>
+      <LastGenOutput>ModelDB-UK-KOKS.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

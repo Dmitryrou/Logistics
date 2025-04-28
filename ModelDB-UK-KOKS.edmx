@@ -87,7 +87,7 @@
           <Property Name="id_Status_Car" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Storage">
+        <EntityType Name="Storage_Accounting">
           <Key>
             <PropertyRef Name="id_Storage" />
           </Key>
@@ -149,10 +149,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Loading_Railway_Storage">
-          <End Role="Storage" Type="Self.Storage" Multiplicity="1" />
+          <End Role="Storage_Accounting" Type="Self.Storage_Accounting" Multiplicity="1" />
           <End Role="Loading_Railway" Type="Self.Loading_Railway" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Storage">
+            <Principal Role="Storage_Accounting">
               <PropertyRef Name="id_Storage" />
             </Principal>
             <Dependent Role="Loading_Railway">
@@ -258,12 +258,12 @@
         </Association>
         <Association Name="FK_Storage_Nomenclature">
           <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
-          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <End Role="Storage_Accounting" Type="Self.Storage_Accounting" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Nomenclature">
               <PropertyRef Name="id_Nomenclature" />
             </Principal>
-            <Dependent Role="Storage">
+            <Dependent Role="Storage_Accounting">
               <PropertyRef Name="id_Nomenclature" />
             </Dependent>
           </ReferentialConstraint>
@@ -327,7 +327,7 @@
           <EntitySet Name="Station_Distination" EntityType="Self.Station_Distination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Station_Loading" EntityType="Self.Station_Loading" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status_Car" EntityType="Self.Status_Car" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage_Accounting" EntityType="Self.Storage_Accounting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_role" EntityType="Self.User_role" Schema="dbo" store:Type="Tables" />
@@ -349,7 +349,7 @@
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
           </AssociationSet>
           <AssociationSet Name="FK_Loading_Railway_Storage" Association="Self.FK_Loading_Railway_Storage">
-            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Storage_Accounting" EntitySet="Storage_Accounting" />
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
           </AssociationSet>
           <AssociationSet Name="FK_Loading_Railway_User" Association="Self.FK_Loading_Railway_User">
@@ -386,7 +386,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Storage_Nomenclature" Association="Self.FK_Storage_Nomenclature">
             <End Role="Nomenclature" EntitySet="Nomenclature" />
-            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Storage_Accounting" EntitySet="Storage_Accounting" />
           </AssociationSet>
           <AssociationSet Name="FK_User_User_role" Association="Self.FK_User_User_role">
             <End Role="User_role" EntitySet="User_role" />
@@ -411,7 +411,7 @@
           <Property Name="id_Railway" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Railway" Relationship="Self.FK_Loading_Railway_Railway" FromRole="Loading_Railway" ToRole="Railway" />
           <NavigationProperty Name="Station_Loading" Relationship="Self.FK_Loading_Railway_Station_Loading" FromRole="Loading_Railway" ToRole="Station_Loading" />
-          <NavigationProperty Name="Storage" Relationship="Self.FK_Loading_Railway_Storage" FromRole="Loading_Railway" ToRole="Storage" />
+          <NavigationProperty Name="Storage_Accounting" Relationship="Self.FK_Loading_Railway_Storage" FromRole="Loading_Railway" ToRole="Storage_Accounting" />
           <NavigationProperty Name="User" Relationship="Self.FK_Loading_Railway_User" FromRole="Loading_Railway" ToRole="User" />
         </EntityType>
         <EntityType Name="Nomenclature">
@@ -420,7 +420,7 @@
           </Key>
           <Property Name="id_Nomenclature" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_Nomenclature" FromRole="Nomenclature" ToRole="Storage" />
+          <NavigationProperty Name="Storage_Accounting" Relationship="Self.FK_Storage_Nomenclature" FromRole="Nomenclature" ToRole="Storage_Accounting" />
         </EntityType>
         <EntityType Name="Railway">
           <Key>
@@ -481,15 +481,15 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Railway" Relationship="Self.FK_Railway_Status_Car" FromRole="Status_Car" ToRole="Railway" />
         </EntityType>
-        <EntityType Name="Storage">
+        <EntityType Name="Storage_Accounting">
           <Key>
             <PropertyRef Name="id_Storage" />
           </Key>
           <Property Name="id_Storage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_Nomenclature" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Loading_Railway" Relationship="Self.FK_Loading_Railway_Storage" FromRole="Storage" ToRole="Loading_Railway" />
-          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Storage_Nomenclature" FromRole="Storage" ToRole="Nomenclature" />
+          <NavigationProperty Name="Loading_Railway" Relationship="Self.FK_Loading_Railway_Storage" FromRole="Storage_Accounting" ToRole="Loading_Railway" />
+          <NavigationProperty Name="Nomenclature" Relationship="Self.FK_Storage_Nomenclature" FromRole="Storage_Accounting" ToRole="Nomenclature" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -566,10 +566,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Loading_Railway_Storage">
-          <End Role="Storage" Type="Self.Storage" Multiplicity="1" />
+          <End Role="Storage_Accounting" Type="Self.Storage_Accounting" Multiplicity="1" />
           <End Role="Loading_Railway" Type="Self.Loading_Railway" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Storage">
+            <Principal Role="Storage_Accounting">
               <PropertyRef Name="id_Storage" />
             </Principal>
             <Dependent Role="Loading_Railway">
@@ -591,12 +591,12 @@
         </Association>
         <Association Name="FK_Storage_Nomenclature">
           <End Role="Nomenclature" Type="Self.Nomenclature" Multiplicity="1" />
-          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <End Role="Storage_Accounting" Type="Self.Storage_Accounting" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Nomenclature">
               <PropertyRef Name="id_Nomenclature" />
             </Principal>
-            <Dependent Role="Storage">
+            <Dependent Role="Storage_Accounting">
               <PropertyRef Name="id_Nomenclature" />
             </Dependent>
           </ReferentialConstraint>
@@ -697,7 +697,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="uk_koksEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="uk_koks_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Loading_Railway" EntityType="Self.Loading_Railway" />
           <EntitySet Name="Nomenclature" EntityType="Self.Nomenclature" />
           <EntitySet Name="Railway" EntityType="Self.Railway" />
@@ -706,7 +706,7 @@
           <EntitySet Name="Station_Distination" EntityType="Self.Station_Distination" />
           <EntitySet Name="Station_Loading" EntityType="Self.Station_Loading" />
           <EntitySet Name="Status_Car" EntityType="Self.Status_Car" />
-          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <EntitySet Name="Storage_Accounting" EntityType="Self.Storage_Accounting" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="User_role" EntityType="Self.User_role" />
@@ -720,7 +720,7 @@
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
           </AssociationSet>
           <AssociationSet Name="FK_Loading_Railway_Storage" Association="Self.FK_Loading_Railway_Storage">
-            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Storage_Accounting" EntitySet="Storage_Accounting" />
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
           </AssociationSet>
           <AssociationSet Name="FK_Loading_Railway_User" Association="Self.FK_Loading_Railway_User">
@@ -729,7 +729,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Storage_Nomenclature" Association="Self.FK_Storage_Nomenclature">
             <End Role="Nomenclature" EntitySet="Nomenclature" />
-            <End Role="Storage" EntitySet="Storage" />
+            <End Role="Storage_Accounting" EntitySet="Storage_Accounting" />
           </AssociationSet>
           <AssociationSet Name="FK_Railway_Railway_Car_Railway" Association="Self.FK_Railway_Railway_Car_Railway">
             <End Role="Railway" EntitySet="Railway" />
@@ -823,7 +823,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koksEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koks_Entities">
           <EntitySetMapping Name="Loading_Railway">
             <EntityTypeMapping TypeName="uk_koksModel.Loading_Railway">
               <MappingFragment StoreEntitySet="Loading_Railway">
@@ -898,9 +898,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Storage">
-            <EntityTypeMapping TypeName="uk_koksModel.Storage">
-              <MappingFragment StoreEntitySet="Storage">
+          <EntitySetMapping Name="Storage_Accounting">
+            <EntityTypeMapping TypeName="uk_koksModel.Storage_Accounting">
+              <MappingFragment StoreEntitySet="Storage_Accounting">
                 <ScalarProperty Name="id_Storage" ColumnName="id_Storage" />
                 <ScalarProperty Name="id_Nomenclature" ColumnName="id_Nomenclature" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />

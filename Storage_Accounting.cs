@@ -12,10 +12,10 @@ namespace Logistics
     using System;
     using System.Collections.Generic;
     
-    public partial class Storage
+    public partial class Storage_Accounting
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Storage()
+        public Storage_Accounting()
         {
             this.Loading_Railway = new HashSet<Loading_Railway>();
         }

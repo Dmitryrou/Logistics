@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Logistics
 {
     /// <summary>
-    /// Логика взаимодействия для Storage.xaml
+    /// Логика взаимодействия для Sklad.xaml
     /// </summary>
-    public partial class Storage : Page
+    public partial class Sklad : Page
     {
-        public Storage()
+        public Sklad()
         {
             InitializeComponent();
         }

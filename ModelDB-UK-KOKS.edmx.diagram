@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="862e311aa26c4ca88b7bbe51865efe60" Name="Diagram1">
+      <Diagram DiagramId="9c8de043d4e942939ce7f2c3d95e1ec6" Name="Diagram1">
         <EntityTypeShape EntityType="uk_koksModel.Loading_Railway" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.Nomenclature" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.Railway" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="uk_koksModel.Station_Distination" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.Station_Loading" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.Status_Car" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="uk_koksModel.Storage" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="uk_koksModel.Storage_Accounting" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.User" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="uk_koksModel.User_role" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />

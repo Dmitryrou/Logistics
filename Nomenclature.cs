@@ -17,13 +17,13 @@ namespace Logistics
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Nomenclature()
         {
-            this.Storage = new HashSet<Storage>();
+            this.Storage_Accounting = new HashSet<Storage_Accounting>();
         }
     
         public int id_Nomenclature { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Storage> Storage { get; set; }
+        public virtual ICollection<Storage_Accounting> Storage_Accounting { get; set; }
     }
 }

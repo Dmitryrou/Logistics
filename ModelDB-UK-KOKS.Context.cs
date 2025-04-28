@@ -15,10 +15,10 @@ namespace Logistics
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class uk_koksEntities : DbContext
+    public partial class uk_koks_Entities : DbContext
     {
-        public uk_koksEntities()
-            : base("name=uk_koksEntities")
+        public uk_koks_Entities()
+            : base("name=uk_koks_Entities")
         {
         }
     
@@ -27,13 +27,13 @@ namespace Logistics
             throw new UnintentionalCodeFirstException();
         }
 
-        private static uk_koksEntities _context = null;
+        private static uk_koks_Entities _context = null;
 
-        public static uk_koksEntities GetContext()
+        public static uk_koks_Entities GetContext()
         {
             if (_context == null)
             {
-                _context = new uk_koksEntities();
+                _context = new uk_koks_Entities();
             }
             return _context;
         }
@@ -46,7 +46,7 @@ namespace Logistics
         public virtual DbSet<Station_Distination> Station_Distination { get; set; }
         public virtual DbSet<Station_Loading> Station_Loading { get; set; }
         public virtual DbSet<Status_Car> Status_Car { get; set; }
-        public virtual DbSet<Storage> Storage { get; set; }
+        public virtual DbSet<Storage_Accounting> Storage_Accounting { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<User_role> User_role { get; set; }
