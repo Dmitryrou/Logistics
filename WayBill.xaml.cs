@@ -20,9 +20,11 @@ namespace Logistics
     /// </summary>
     public partial class WayBill : Page
     {
-        public WayBill()
+        private User User = new User();
+        public WayBill(User user)
         {
             InitializeComponent();
+            this.User = user;
         }
     }
 }

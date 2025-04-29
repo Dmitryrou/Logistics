@@ -20,9 +20,32 @@ namespace Logistics
     /// </summary>
     public partial class Sklad : Page
     {
-        public Sklad()
+        private User User = new User();
+        public Sklad(User user)
         {
             InitializeComponent();
+            this.User = user;
+        }
+
+        private void Button_Click_Insert(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Refresh(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        public static void Refresh()
+        {
+            DataGridStorage.ItemsSource = uk_koks_Entities.GetContext().Sto.ToList();
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

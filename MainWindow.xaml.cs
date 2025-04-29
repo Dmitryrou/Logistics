@@ -21,6 +21,9 @@ namespace Logistics
     /// </summary>
     public partial class MainWindow : Window
     {
+        public User user { get; set; } = new User();
+
+        private UserWindow userWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,9 +31,8 @@ namespace Logistics
 
         private void Button_Click_Auth(object sender, RoutedEventArgs e)
         {
-            string login = Login_txb.Text.Trim();
+            string login = Login_txb.Text.Trim(); 
             string password = Password_Pas.Password.Trim();
-
             ObjectResult<Nullable<int>> id = uk_koks_Entities.GetContext().CheckPassword(login, password);
             // Извлекаем значение
             Nullable<int> nullableInt = id.FirstOrDefault();
@@ -38,16 +40,20 @@ namespace Logistics
             // Преобразуем в int, если значение не null
             int result = nullableInt ?? 0;
 
-            //Авторизация
-            if (result == 0) 
+            if (result > 0)
             {
-                MessageBox.Show("Вы ввели неверный пароль");
+                user = uk_koks_Entities.GetContext().User.Where(item => item.id_user == result).FirstOrDefault();
+                MessageBox.Show("Здравствуйте, " + user.Name + ", вы успешно вошли в систему ",
+                    "Успешная авторизация",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                userWindow = new UserWindow(user);
+                userWindow.Show();
+                this.Close();
             }
             else
             {
-                UserWindow userWindow = new UserWindow();
-                userWindow.Show();
-                this.Close();
+                MessageBox.Show("Вы ввели неверный логин или пароль", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
         }

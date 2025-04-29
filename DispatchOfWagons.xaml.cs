@@ -20,9 +20,11 @@ namespace Logistics
     /// </summary>
     public partial class DispatchOfWagons : Page
     {
-        public DispatchOfWagons()
+        private User User = new User();
+        public DispatchOfWagons(User user)
         {
             InitializeComponent();
+            this.User = user;
         }
     }
 }

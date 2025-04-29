@@ -19,9 +19,11 @@ namespace Logistics
     /// </summary>
     public partial class UserWindow : Window
     {
-        public UserWindow()
+        private User User = new User();
+        public UserWindow(User user)
         {
             InitializeComponent();
+            this.User = user;
         }
 
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
@@ -31,32 +33,38 @@ namespace Logistics
 
         private void btn_storage_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new Sklad());
+            frm_HomePage.NavigationService.Navigate(new Sklad(User));
         }
 
         private void btn_waybill_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new WayBill());
+            frm_HomePage.NavigationService.Navigate(new WayBill(User));
         }
 
         private void btn_acceptance_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new AcceptanceOfWagon());
+            frm_HomePage.NavigationService.Navigate(new AcceptanceOfWagon(User));
         }
 
         private void btn_loading_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new LoadingOfWagons());
+            frm_HomePage.NavigationService.Navigate(new LoadingOfWagons(User));
         }
 
         private void btn_CreateSost_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new CreateOfSostav());
+            frm_HomePage.NavigationService.Navigate(new CreateOfSostav(User));
         }
 
         private void btn_dispatch_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new DispatchOfWagons());
+            frm_HomePage.NavigationService.Navigate(new DispatchOfWagons(User));
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string fio = User.FirstName + " " + User.Name + " " + User.LastName;
+            fio_tbx.Text = fio;
         }
     }
 }

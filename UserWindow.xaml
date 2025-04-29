@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Logistics"
         mc:Ignorable="d"
-        Title="Главная страница" Width="1360" Height="768" >
+        Title="Главная страница" Width="1360" Height="768" Loaded="Window_Loaded" >
     <Grid>
         <StackPanel>
-            <Grid>
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1290"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button HorizontalAlignment="Right" Grid.Column="1" Click="Button_Click_Exit">Выйти</Button>
-                <TextBlock HorizontalAlignment="Right" FontSize="14" Grid.Column="0">FIO</TextBlock>
+                <TextBlock HorizontalAlignment="Right" FontSize="14" Grid.Column="0" Name="fio_tbx">FIO</TextBlock>
             </Grid>
 
             <Grid>

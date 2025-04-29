@@ -20,9 +20,11 @@ namespace Logistics
     /// </summary>
     public partial class CreateOfSostav : Page
     {
-        public CreateOfSostav()
+        private User User = new User();
+        public CreateOfSostav(User user)
         {
             InitializeComponent();
+            this.User = user;
         }
     }
 }
