@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
         d:DesignHeight="740" d:DesignWidth="1000"
   Title="StorageAc" Loaded="Button_Click_Refresh">
-
     <Grid Background="White">
         <StackPanel Margin="15">
             <Grid>
@@ -23,15 +22,39 @@
                 <ComboBox Margin="5" Grid.Row="1" Name="cmb_Storage"></ComboBox>
                 <TextBox Grid.Column = "1" Margin="5" Grid.Row="1" Name="txb_quantity"></TextBox>
                 <Button Grid.Column = "2" Margin="5" Grid.Row="1" Click="Button_Click_Insert">Изменить</Button>
-                <TextBlock Margin="5">Выберите Склад</TextBlock>
+                <TextBlock Margin="5">Выберите номенклатуру</TextBlock>
                 <TextBlock Grid.Column = "1" Margin="5">Введите нужное количество угля</TextBlock>
             </Grid>
             <Button Grid.Column = "4" Margin="5" Click="Button_Click_Refresh">Обновить график</Button>
-            <Grid Margin="5">
-                <DataGrid Height="auto" Name="DataGridStorage">
-
-                </DataGrid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Name="tbx_1"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="5" Name="tbx_11"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5" Name="tbx_2"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="5" Name="tbx_22"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" Margin="5" Name="tbx_3"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="2" Margin="5" Name="tbx_33"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" Margin="5" Name="tbx_4"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="3" Margin="5" Name="tbx_44"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="4" Margin="5" Name="tbx_5"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="4" Margin="5" Name="tbx_55"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="5" Margin="5" Name="tbx_6"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="5" Margin="5" Name="tbx_66"></TextBlock>
+                
             </Grid>
+
         </StackPanel>
         
     </Grid>
