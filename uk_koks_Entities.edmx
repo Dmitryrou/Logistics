@@ -697,7 +697,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="uk_koks_Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="uk_koks_Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Loading_Railway" EntityType="Self.Loading_Railway" />
           <EntitySet Name="Nomenclature" EntityType="Self.Nomenclature" />
           <EntitySet Name="Railway" EntityType="Self.Railway" />
@@ -803,7 +803,7 @@
         </EntityContainer>
         <ComplexType Name="SelectRailWay_Result">
           <Property Type="Int32" Name="id_Railway" Nullable="false" />
-          <Property Type="Int32" Name="id_Status_Car" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Tare_Weight" Nullable="false" />
           <Property Type="Int32" Name="Capacity_Car" Nullable="false" />
         </ComplexType>
@@ -823,7 +823,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koks_Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koks_Entities1">
           <EntitySetMapping Name="Loading_Railway">
             <EntityTypeMapping TypeName="uk_koksModel.Loading_Railway">
               <MappingFragment StoreEntitySet="Loading_Railway">
@@ -955,7 +955,7 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWay_Result">
                 <ScalarProperty Name="id_Railway" ColumnName="id_Railway" />
-                <ScalarProperty Name="id_Status_Car" ColumnName="id_Status_Car" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Tare_Weight" ColumnName="Tare_Weight" />
                 <ScalarProperty Name="Capacity_Car" ColumnName="Capacity_Car" />
               </ComplexTypeMapping>

@@ -14,7 +14,7 @@ namespace Logistics
     public partial class SelectRailWay_Result
     {
         public int id_Railway { get; set; }
-        public int id_Status_Car { get; set; }
+        public string Name { get; set; }
         public int Tare_Weight { get; set; }
         public int Capacity_Car { get; set; }
     }

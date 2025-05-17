@@ -17,8 +17,9 @@ namespace Logistics
     
     public partial class uk_koks_Entities : DbContext
     {
+
         public uk_koks_Entities()
-            : base("name=uk_koks_Entities")
+            : base("name=uk_koks_Entities1")
         {
         }
     

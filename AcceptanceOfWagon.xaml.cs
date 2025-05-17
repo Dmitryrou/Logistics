@@ -26,5 +26,10 @@ namespace Logistics
             InitializeComponent();
             this.User = user;
         }
+
+        private void Page_Loaded_AcceptanceOfWagon(object sender, RoutedEventArgs e)
+        {
+            dg_Wagons.ItemsSource = uk_koks_Entities.GetContext().SelectRailWay(1);
+        }
     }
 }

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Logistics"
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1000"
-      Title="AcceptanceOfWagon">
+      Title="AcceptanceOfWagon"
+      Loaded="Page_Loaded_AcceptanceOfWagon">
 
     <Grid Background="White">
         <StackPanel Margin="10">
@@ -34,7 +35,11 @@
                 <Button Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140"/>
                 <Button Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140"/>
             </Grid>
-
+            <Grid Margin="10">
+                <DataGrid x:Name="dg_Wagons">
+                    
+                </DataGrid>
+            </Grid>
 
         </StackPanel>
 
