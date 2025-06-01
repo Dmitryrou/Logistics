@@ -23,7 +23,9 @@ namespace Logistics
     
         public int id_Railway_Car { get; set; }
         public string Name_Car { get; set; }
+        public Nullable<int> id_Status_Car { get; set; }
     
+        public virtual Status_Car Status_Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Railway_Railway_Car> Railway_Railway_Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

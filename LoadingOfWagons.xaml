@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Logistics"
       mc:Ignorable="d" 
       d:DesignHeight="740" d:DesignWidth="1000"
-      Title="Загрузка вагонов">
+      Title="Загрузка вагонов"
+      Loaded="Page_Loaded">
 
     <Grid Background="White">
         <StackPanel Margin="5">
@@ -26,21 +27,20 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Номер вагона" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Станция отправителя" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Станция погрузки" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock Text="Номенклатура" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Склад" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Дата" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock Text="Количество в т." Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Грузоподъемность" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Margin="10" Width="130" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox  Margin="10" Width="130" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Margin="10" Grid.Column="5" Grid.Row="1" Content = "Записать данные"/>
-                <Button Margin="10" Grid.Column="5" Grid.Row="3" Content = "Удалить данные"/>
+                <ComboBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="cbx_id_railway"/>
+                <ComboBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="cbx_stationLoading"/>
+                <ComboBox  Margin="10" Width="130" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="cbx_nomenclature"/>
+                <TextBox  Margin="10" Width="130" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="txb_quantity"/>
+                <Button Margin="10" Grid.Column="5" Grid.Row="1" Content = "Записать данные" Click="Button_Click_add"/>
+                <Button Margin="10" Grid.Column="4" Grid.Row="1" Content = "Удалить данные" Click="Button_Click_remove"/>
+            </Grid>
+            <Grid Margin="10">
+                <DataGrid x:Name="dg_Wagons2">
+
+                </DataGrid>
             </Grid>
         </StackPanel>
     </Grid>

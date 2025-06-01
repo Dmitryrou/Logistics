@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Logistics"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
       d:DesignHeight="740" d:DesignWidth="1000"
       Title="Отправка составов">
 
@@ -14,26 +15,28 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Margin="5" Grid.Column="0" Grid.Row="0">Выберите номер состава</TextBlock>
-                <TextBlock Margin="5" Grid.Column="1" Grid.Row="0">Выберите станцию отправителя</TextBlock>
                 <TextBlock Margin="5" Grid.Column="2" Grid.Row="0">Выберите станцию получателя</TextBlock>
-                <ComboBox Margin="5" Grid.Column="0" Grid.Row="1"></ComboBox>
-                <ComboBox Margin="5" Grid.Column="1" Grid.Row="1"></ComboBox>
-                <ComboBox Margin="5" Grid.Column="2" Grid.Row="1"></ComboBox>
+                <ComboBox Margin="5" Grid.Column="0" Grid.Row="1" Name="cmb_RailwayCar"></ComboBox>
+                <ComboBox Margin="5" Grid.Column="2" Grid.Row="1" Name="cmb_StationDistination"></ComboBox>
             </Grid>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Margin="5">Отправить состав</Button>
-                <Button Margin="5" Grid.Column="1">Удалить состав</Button>
+                <Button Margin="5" Click="Button_Click_Add">Отправить состав</Button>
+                <Button Margin="5" Grid.Column="1" Click="Button_Click_Remove">Удалить состав</Button>
+            </Grid>
+            <Grid Margin="10">
+                <DataGrid Name="dg_RailwaySending" >
+                    
+                </DataGrid>
             </Grid>
         </StackPanel>
     </Grid>

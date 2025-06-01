@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище uk_koksModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище uk_koksModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Loading_Railway">
           <Key>
             <PropertyRef Name="id_Loading_Railway" />
@@ -39,6 +39,7 @@
           </Key>
           <Property Name="id_Railway_Car" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name_Car" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Status_Car" Type="int" />
         </EntityType>
         <EntityType Name="Railway_Railway_Car">
           <Key>
@@ -48,15 +49,9 @@
           <Property Name="id_Railway_Car" Type="int" Nullable="false" />
           <Property Name="id_Railway" Type="int" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "uk_koks.dbo.Sending_Railway" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="Sending_Railway">
           <Key>
             <PropertyRef Name="id_Sending_Railway" />
-            <PropertyRef Name="id_Railway_Car" />
-            <PropertyRef Name="id_Station_Distination" />
-            <PropertyRef Name="id_user" />
-            <PropertyRef Name="DateTime" />
           </Key>
           <Property Name="id_Sending_Railway" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_Railway_Car" Type="int" Nullable="false" />
@@ -169,6 +164,18 @@
             </Principal>
             <Dependent Role="Loading_Railway">
               <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Railway_Car_Status_Car">
+          <End Role="Status_Car" Type="Self.Status_Car" Multiplicity="0..1" />
+          <End Role="Railway_Car" Type="Self.Railway_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Car">
+              <PropertyRef Name="id_Status_Car" />
+            </Principal>
+            <Dependent Role="Railway_Car">
+              <PropertyRef Name="id_Status_Car" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,6 +295,15 @@
         <Function Name="SelectRailWay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Status" Type="int" Mode="In" />
         </Function>
+        <Function Name="SelectRailWayCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectRailWayCarSending" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectRailWayDicpathch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Status" Type="int" Mode="In" />
+          <Parameter Name="id_Railway_car" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectRailWayLoading" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Status" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -324,6 +340,7 @@
           <EntitySet Name="Railway" EntityType="Self.Railway" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Railway_Car" EntityType="Self.Railway_Car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Railway_Railway_Car" EntityType="Self.Railway_Railway_Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sending_Railway" EntityType="Self.Sending_Railway" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Station_Distination" EntityType="Self.Station_Distination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Station_Loading" EntityType="Self.Station_Loading" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status_Car" EntityType="Self.Status_Car" Schema="dbo" store:Type="Tables" />
@@ -331,15 +348,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_role" EntityType="Self.User_role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sending_Railway" EntityType="Self.Sending_Railway" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sending_Railway].[id_Sending_Railway] AS [id_Sending_Railway], 
-    [Sending_Railway].[id_Railway_Car] AS [id_Railway_Car], 
-    [Sending_Railway].[id_Station_Distination] AS [id_Station_Distination], 
-    [Sending_Railway].[id_user] AS [id_user], 
-    [Sending_Railway].[DateTime] AS [DateTime]
-    FROM [dbo].[Sending_Railway] AS [Sending_Railway]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Loading_Railway_Railway" Association="Self.FK_Loading_Railway_Railway">
             <End Role="Railway" EntitySet="Railway" />
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
@@ -355,6 +363,10 @@
           <AssociationSet Name="FK_Loading_Railway_User" Association="Self.FK_Loading_Railway_User">
             <End Role="User" EntitySet="User" />
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Railway_Car_Status_Car" Association="Self.FK_Railway_Car_Status_Car">
+            <End Role="Status_Car" EntitySet="Status_Car" />
+            <End Role="Railway_Car" EntitySet="Railway_Car" />
           </AssociationSet>
           <AssociationSet Name="FK_Railway_Railway_Car_Railway" Association="Self.FK_Railway_Railway_Car_Railway">
             <End Role="Railway" EntitySet="Railway" />
@@ -393,8 +405,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="uk_koksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -441,6 +452,8 @@
           </Key>
           <Property Name="id_Railway_Car" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name_Car" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_Status_Car" Type="Int32" />
+          <NavigationProperty Name="Status_Car" Relationship="Self.FK_Railway_Car_Status_Car" FromRole="Railway_Car" ToRole="Status_Car" />
           <NavigationProperty Name="Railway_Railway_Car" Relationship="Self.FK_Railway_Railway_Car_Railway_Car" FromRole="Railway_Car" ToRole="Railway_Railway_Car" />
           <NavigationProperty Name="Sending_Railway" Relationship="Self.FK_Sending_Railway_Railway_Car" FromRole="Railway_Car" ToRole="Sending_Railway" />
         </EntityType>
@@ -454,6 +467,19 @@
           <NavigationProperty Name="Railway" Relationship="Self.FK_Railway_Railway_Car_Railway" FromRole="Railway_Railway_Car" ToRole="Railway" />
           <NavigationProperty Name="Railway1" Relationship="Self.FK_Railway_Railway_Car_Railway1" FromRole="Railway_Railway_Car" ToRole="Railway" />
           <NavigationProperty Name="Railway_Car" Relationship="Self.FK_Railway_Railway_Car_Railway_Car" FromRole="Railway_Railway_Car" ToRole="Railway_Car" />
+        </EntityType>
+        <EntityType Name="Sending_Railway">
+          <Key>
+            <PropertyRef Name="id_Sending_Railway" />
+          </Key>
+          <Property Name="id_Sending_Railway" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Railway_Car" Type="Int32" Nullable="false" />
+          <Property Name="id_Station_Distination" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Railway_Car" Relationship="Self.FK_Sending_Railway_Railway_Car" FromRole="Sending_Railway" ToRole="Railway_Car" />
+          <NavigationProperty Name="Station_Distination" Relationship="Self.FK_Sending_Railway_Station_Distination" FromRole="Sending_Railway" ToRole="Station_Distination" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Sending_Railway_User" FromRole="Sending_Railway" ToRole="User" />
         </EntityType>
         <EntityType Name="Station_Distination">
           <Key>
@@ -480,6 +506,7 @@
           <Property Name="id_Status_Car" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Railway" Relationship="Self.FK_Railway_Status_Car" FromRole="Status_Car" ToRole="Railway" />
+          <NavigationProperty Name="Railway_Car" Relationship="Self.FK_Railway_Car_Status_Car" FromRole="Status_Car" ToRole="Railway_Car" />
         </EntityType>
         <EntityType Name="Storage_Accounting">
           <Key>
@@ -523,23 +550,6 @@
           <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_User_role" FromRole="User_role" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Sending_Railway">
-          <Key>
-            <PropertyRef Name="id_Sending_Railway" />
-            <PropertyRef Name="id_Railway_Car" />
-            <PropertyRef Name="id_Station_Distination" />
-            <PropertyRef Name="id_user" />
-            <PropertyRef Name="DateTime" />
-          </Key>
-          <Property Name="id_Sending_Railway" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Railway_Car" Type="Int32" Nullable="false" />
-          <Property Name="id_Station_Distination" Type="Int32" Nullable="false" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Railway_Car" Relationship="Self.FK_Sending_Railway_Railway_Car" FromRole="Sending_Railway" ToRole="Railway_Car" />
-          <NavigationProperty Name="Station_Distination" Relationship="Self.FK_Sending_Railway_Station_Distination" FromRole="Sending_Railway" ToRole="Station_Distination" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Sending_Railway_User" FromRole="Sending_Railway" ToRole="User" />
         </EntityType>
         <Association Name="FK_Loading_Railway_Railway">
           <End Role="Railway" Type="Self.Railway" Multiplicity="1" />
@@ -637,6 +647,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Railway_Car_Status_Car">
+          <End Role="Status_Car" Type="Self.Status_Car" Multiplicity="0..1" />
+          <End Role="Railway_Car" Type="Self.Railway_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Car">
+              <PropertyRef Name="id_Status_Car" />
+            </Principal>
+            <Dependent Role="Railway_Car">
+              <PropertyRef Name="id_Status_Car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Railway_Railway_Car_Railway_Car">
           <End Role="Railway_Car" Type="Self.Railway_Car" Multiplicity="1" />
           <End Role="Railway_Railway_Car" Type="Self.Railway_Railway_Car" Multiplicity="*" />
@@ -697,12 +719,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="uk_koks_Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="uk_koksEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Loading_Railway" EntityType="Self.Loading_Railway" />
           <EntitySet Name="Nomenclature" EntityType="Self.Nomenclature" />
           <EntitySet Name="Railway" EntityType="Self.Railway" />
           <EntitySet Name="Railway_Car" EntityType="Self.Railway_Car" />
           <EntitySet Name="Railway_Railway_Car" EntityType="Self.Railway_Railway_Car" />
+          <EntitySet Name="Sending_Railway" EntityType="Self.Sending_Railway" />
           <EntitySet Name="Station_Distination" EntityType="Self.Station_Distination" />
           <EntitySet Name="Station_Loading" EntityType="Self.Station_Loading" />
           <EntitySet Name="Status_Car" EntityType="Self.Status_Car" />
@@ -710,7 +733,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="User_role" EntityType="Self.User_role" />
-          <EntitySet Name="Sending_Railway" EntityType="Self.Sending_Railway" />
           <AssociationSet Name="FK_Loading_Railway_Railway" Association="Self.FK_Loading_Railway_Railway">
             <End Role="Railway" EntitySet="Railway" />
             <End Role="Loading_Railway" EntitySet="Loading_Railway" />
@@ -743,6 +765,10 @@
             <End Role="Status_Car" EntitySet="Status_Car" />
             <End Role="Railway" EntitySet="Railway" />
           </AssociationSet>
+          <AssociationSet Name="FK_Railway_Car_Status_Car" Association="Self.FK_Railway_Car_Status_Car">
+            <End Role="Status_Car" EntitySet="Status_Car" />
+            <End Role="Railway_Car" EntitySet="Railway_Car" />
+          </AssociationSet>
           <AssociationSet Name="FK_Railway_Railway_Car_Railway_Car" Association="Self.FK_Railway_Railway_Car_Railway_Car">
             <End Role="Railway_Car" EntitySet="Railway_Car" />
             <End Role="Railway_Railway_Car" EntitySet="Railway_Railway_Car" />
@@ -768,7 +794,15 @@
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SelectRailWay" ReturnType="Collection(uk_koksModel.SelectRailWay_Result)">
+          <Parameter Name="id_Status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectRailWayCar" ReturnType="Collection(uk_koksModel.SelectRailWayCar_Result)" />
+          <FunctionImport Name="SelectRailWayDicpathch" ReturnType="Collection(uk_koksModel.SelectRailWayDicpathch_Result)">
             <Parameter Name="id_Status" Mode="In" Type="Int32" />
+            <Parameter Name="id_Railway_car" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectRailWayLoading" ReturnType="Collection(uk_koksModel.SelectRailWayLoading_Result)">
+          <Parameter Name="id_Status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -800,12 +834,34 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SelectRailWayCarSending" ReturnType="Collection(uk_koksModel.SelectRailWayCarSending_Result)" />
         </EntityContainer>
         <ComplexType Name="SelectRailWay_Result">
-          <Property Type="Int32" Name="id_Railway" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Tare_Weight" Nullable="false" />
-          <Property Type="Int32" Name="Capacity_Car" Nullable="false" />
+          <Property Type="Int32" Name="Номер" Nullable="false" />
+          <Property Type="String" Name="Статус" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Вес" Nullable="false" />
+          <Property Type="Int32" Name="Нетто" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectRailWayCar_Result">
+          <Property Type="Int32" Name="ИдентификационныйНомер" Nullable="false" />
+          <Property Type="String" Name="Наименование" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Статус" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SelectRailWayDicpathch_Result">
+          <Property Type="String" Name="Поезд" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="НомерПоезда" Nullable="false" />
+          <Property Type="Int32" Name="Вагон" Nullable="false" />
+          <Property Type="Int32" Name="Нетто" Nullable="false" />
+          <Property Type="Int32" Name="НомерЗаписи" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectRailWayLoading_Result">
+          <Property Type="Int32" Name="Номер" Nullable="false" />
+          <Property Type="Int32" Name="Нетто" Nullable="false" />
+          <Property Type="Int32" Name="Вместимость" Nullable="false" />
+          <Property Type="DateTime" Name="Дата" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ВесВагона" Nullable="false" />
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -818,12 +874,19 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="SelectRailWayCarSending_Result">
+          <Property Type="Int32" Name="НомерЗаписи" Nullable="false" />
+          <Property Type="String" Name="Поезд" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="СтанцияПолучателя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="ДатаСоздания" Nullable="false" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koks_Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище uk_koksModelContainer" CdmEntityContainer="uk_koksEntities2">
           <EntitySetMapping Name="Loading_Railway">
             <EntityTypeMapping TypeName="uk_koksModel.Loading_Railway">
               <MappingFragment StoreEntitySet="Loading_Railway">
@@ -860,6 +923,7 @@
               <MappingFragment StoreEntitySet="Railway_Car">
                 <ScalarProperty Name="id_Railway_Car" ColumnName="id_Railway_Car" />
                 <ScalarProperty Name="Name_Car" ColumnName="Name_Car" />
+                <ScalarProperty Name="id_Status_Car" ColumnName="id_Status_Car" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -869,6 +933,17 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_Railway_Car" ColumnName="id_Railway_Car" />
                 <ScalarProperty Name="id_Railway" ColumnName="id_Railway" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sending_Railway">
+            <EntityTypeMapping TypeName="uk_koksModel.Sending_Railway">
+              <MappingFragment StoreEntitySet="Sending_Railway">
+                <ScalarProperty Name="id_Sending_Railway" ColumnName="id_Sending_Railway" />
+                <ScalarProperty Name="id_Railway_Car" ColumnName="id_Railway_Car" />
+                <ScalarProperty Name="id_Station_Distination" ColumnName="id_Station_Distination" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -939,25 +1014,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sending_Railway">
-            <EntityTypeMapping TypeName="uk_koksModel.Sending_Railway">
-              <MappingFragment StoreEntitySet="Sending_Railway">
-                <ScalarProperty Name="id_Sending_Railway" ColumnName="id_Sending_Railway" />
-                <ScalarProperty Name="id_Railway_Car" ColumnName="id_Railway_Car" />
-                <ScalarProperty Name="id_Station_Distination" ColumnName="id_Station_Distination" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CheckPassword" FunctionName="Хранилище uk_koksModel.CheckPassword" />
           <FunctionImportMapping FunctionImportName="SelectRailWay" FunctionName="Хранилище uk_koksModel.SelectRailWay">
             <ResultMapping>
               <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWay_Result">
-                <ScalarProperty Name="id_Railway" ColumnName="id_Railway" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Tare_Weight" ColumnName="Tare_Weight" />
-                <ScalarProperty Name="Capacity_Car" ColumnName="Capacity_Car" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Вес" ColumnName="Вес" />
+                <ScalarProperty Name="Нетто" ColumnName="Нетто" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectRailWayCar" FunctionName="Хранилище uk_koksModel.SelectRailWayCar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWayCar_Result">
+                <ScalarProperty Name="ИдентификационныйНомер" ColumnName="ИдентификационныйНомер" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectRailWayDicpathch" FunctionName="Хранилище uk_koksModel.SelectRailWayDicpathch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWayDicpathch_Result">
+                <ScalarProperty Name="Поезд" ColumnName="Поезд" />
+                <ScalarProperty Name="НомерПоезда" ColumnName="НомерПоезда" />
+                <ScalarProperty Name="Вагон" ColumnName="Вагон" />
+                <ScalarProperty Name="Нетто" ColumnName="Нетто" />
+                <ScalarProperty Name="НомерЗаписи" ColumnName="НомерЗаписи" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectRailWayLoading" FunctionName="Хранилище uk_koksModel.SelectRailWayLoading">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWayLoading_Result">
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Нетто" ColumnName="Нетто" />
+                <ScalarProperty Name="Вместимость" ColumnName="Вместимость" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="ВесВагона" ColumnName="ВесВагона" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -985,6 +1082,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище uk_koksModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище uk_koksModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SelectRailWayCarSending" FunctionName="Хранилище uk_koksModel.SelectRailWayCarSending">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="uk_koksModel.SelectRailWayCarSending_Result">
+                <ScalarProperty Name="НомерЗаписи" ColumnName="НомерЗаписи" />
+                <ScalarProperty Name="Поезд" ColumnName="Поезд" />
+                <ScalarProperty Name="СтанцияПолучателя" ColumnName="СтанцияПолучателя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="ДатаСоздания" ColumnName="ДатаСоздания" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

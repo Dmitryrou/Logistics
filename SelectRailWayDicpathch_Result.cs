@@ -11,11 +11,12 @@ namespace Logistics
 {
     using System;
     
-    public partial class SelectRailWay_Result
+    public partial class SelectRailWayDicpathch_Result
     {
-        public int Номер { get; set; }
-        public string Статус { get; set; }
-        public int Вес { get; set; }
+        public string Поезд { get; set; }
+        public int НомерПоезда { get; set; }
+        public int Вагон { get; set; }
         public int Нетто { get; set; }
+        public int НомерЗаписи { get; set; }
     }
 }

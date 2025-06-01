@@ -34,6 +34,7 @@
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_capacity"/>
                 <Button Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Check"/>
                 <Button Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Add"/>
+                <Button Content="Удалить запись" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Del"/>
             </Grid>
             <Grid Margin="10">
                 <DataGrid x:Name="dg_Wagons">

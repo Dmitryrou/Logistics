@@ -66,5 +66,15 @@ namespace Logistics
             string fio = User.FirstName + " " + User.Name + " " + User.LastName;
             fio_tbx.Text = fio;
         }
+
+        private void btn_Create_train_Click(object sender, RoutedEventArgs e)
+        {
+            frm_HomePage.NavigationService.Navigate(new CreateTrain(User));
+        }
+
+        private void btn_Report_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

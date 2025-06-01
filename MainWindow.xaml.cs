@@ -33,7 +33,7 @@ namespace Logistics
         {
             string login = Login_txb.Text.Trim(); 
             string password = Password_Pas.Password.Trim();
-            ObjectResult<Nullable<int>> id = uk_koks_Entities.GetContext().CheckPassword(login, password);
+            ObjectResult<Nullable<int>> id = uk_koksEntities2.GetContext().CheckPassword(login, password);
             // Извлекаем значение
             Nullable<int> nullableInt = id.FirstOrDefault();
 
@@ -42,7 +42,7 @@ namespace Logistics
 
             if (result > 0)
             {
-                user = uk_koks_Entities.GetContext().User.Where(item => item.id_user == result).FirstOrDefault();
+                user = uk_koksEntities2.GetContext().User.Where(item => item.id_user == result).FirstOrDefault();
                 MessageBox.Show("Здравствуйте, " + user.Name + ", вы успешно вошли в систему ",
                     "Успешная авторизация",
                     MessageBoxButton.OK,

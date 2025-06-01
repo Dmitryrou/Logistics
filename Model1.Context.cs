@@ -15,11 +15,10 @@ namespace Logistics
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class uk_koks_Entities : DbContext
+    public partial class uk_koksEntities2 : DbContext
     {
-
-        public uk_koks_Entities()
-            : base("name=uk_koks_Entities1")
+        public uk_koksEntities2()
+            : base("name=uk_koksEntities2")
         {
         }
     
@@ -28,13 +27,13 @@ namespace Logistics
             throw new UnintentionalCodeFirstException();
         }
 
-        private static uk_koks_Entities _context = null;
+        private static uk_koksEntities2 _context = null;
 
-        public static uk_koks_Entities GetContext()
+        public static uk_koksEntities2 GetContext()
         {
             if (_context == null)
             {
-                _context = new uk_koks_Entities();
+                _context = new uk_koksEntities2();
             }
             return _context;
         }
@@ -44,6 +43,7 @@ namespace Logistics
         public virtual DbSet<Railway> Railway { get; set; }
         public virtual DbSet<Railway_Car> Railway_Car { get; set; }
         public virtual DbSet<Railway_Railway_Car> Railway_Railway_Car { get; set; }
+        public virtual DbSet<Sending_Railway> Sending_Railway { get; set; }
         public virtual DbSet<Station_Distination> Station_Distination { get; set; }
         public virtual DbSet<Station_Loading> Station_Loading { get; set; }
         public virtual DbSet<Status_Car> Status_Car { get; set; }
@@ -51,7 +51,6 @@ namespace Logistics
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<User_role> User_role { get; set; }
-        public virtual DbSet<Sending_Railway> Sending_Railway { get; set; }
     
         public virtual ObjectResult<Nullable<int>> CheckPassword(string username, string password)
         {
@@ -73,6 +72,33 @@ namespace Logistics
                 new ObjectParameter("id_Status", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectRailWay_Result>("SelectRailWay", id_StatusParameter);
+        }
+    
+        public virtual ObjectResult<SelectRailWayCar_Result> SelectRailWayCar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectRailWayCar_Result>("SelectRailWayCar");
+        }
+    
+        public virtual ObjectResult<SelectRailWayDicpathch_Result> SelectRailWayDicpathch(Nullable<int> id_Status, Nullable<int> id_Railway_car)
+        {
+            var id_StatusParameter = id_Status.HasValue ?
+                new ObjectParameter("id_Status", id_Status) :
+                new ObjectParameter("id_Status", typeof(int));
+    
+            var id_Railway_carParameter = id_Railway_car.HasValue ?
+                new ObjectParameter("id_Railway_car", id_Railway_car) :
+                new ObjectParameter("id_Railway_car", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectRailWayDicpathch_Result>("SelectRailWayDicpathch", id_StatusParameter, id_Railway_carParameter);
+        }
+    
+        public virtual ObjectResult<SelectRailWayLoading_Result> SelectRailWayLoading(Nullable<int> id_Status)
+        {
+            var id_StatusParameter = id_Status.HasValue ?
+                new ObjectParameter("id_Status", id_Status) :
+                new ObjectParameter("id_Status", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectRailWayLoading_Result>("SelectRailWayLoading", id_StatusParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -176,6 +202,11 @@ namespace Logistics
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<SelectRailWayCarSending_Result> SelectRailWayCarSending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectRailWayCarSending_Result>("SelectRailWayCarSending");
         }
     }
 }

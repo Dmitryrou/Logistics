@@ -18,6 +18,7 @@ namespace Logistics
         public Status_Car()
         {
             this.Railway = new HashSet<Railway>();
+            this.Railway_Car = new HashSet<Railway_Car>();
         }
     
         public int id_Status_Car { get; set; }
@@ -25,5 +26,7 @@ namespace Logistics
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Railway> Railway { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Railway_Car> Railway_Car { get; set; }
     }
 }
