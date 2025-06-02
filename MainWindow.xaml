@@ -6,13 +6,55 @@
         xmlns:local="clr-namespace:Logistics"
         mc:Ignorable="d"
         Title="Авторизация" Height="250" Width="400">
+    <Window.Resources>
+        <Style x:Key="DefBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFDCDCDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#FF666666"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    CornerRadius="1" 
+                    Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--Some setters here-->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Margin="5">Введите логин</TextBlock>
             <TextBox Margin="5" Width="300" Name="Login_txb"></TextBox>
             <TextBlock Margin="5">Введите пароль</TextBlock>
             <PasswordBox Margin="5" Name="Password_Pas"></PasswordBox>
-            <Button Margin="5" Click="Button_Click_Auth">Вход</Button>
+            <Button Margin="5" Click="Button_Click_Auth" Style="{StaticResource DefBtn}">Вход</Button>
         </StackPanel>
     </Grid>
 </Window>

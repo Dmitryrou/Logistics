@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application = Microsoft.Office.Interop.Word.Application;
+using Paragraph = Microsoft.Office.Interop.Word.Paragraph;
+using Table = Microsoft.Office.Interop.Word.Table;
+using Page = System.Windows.Controls.Page;
 
 namespace Logistics
 {
@@ -70,6 +74,51 @@ namespace Logistics
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             dg_Train.ItemsSource = uk_koksEntities2.GetContext().SelectRailWayCar();
+        }
+
+        private void Button_Click_Word(object sender, RoutedEventArgs e)
+        {
+            var wordApp = new Application();
+            var document = wordApp.Documents.Add();
+
+            // Добавляем заголовок
+            Paragraph paragraph = document.Content.Paragraphs.Add();
+            paragraph.Range.Text = "Отчет по поездам на " + DateTime.Now.ToString();
+            paragraph.Range.InsertParagraphAfter();
+
+            // Создаем таблицу в Word
+            int rowCount = dg_Train.Items.Count;
+            int columnCount = 3;
+
+            Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
+            table.Borders.Enable = 1; // Включаем границы таблицы
+
+            // Заполняем заголовки столбцов
+
+            table.Cell(1, 0 + 1).Range.Text = "Идентификационный Номер";
+            table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 1 + 1).Range.Text = "Наименование";
+            table.Cell(1, 1 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 2 + 1).Range.Text = "Статус";
+            table.Cell(1, 2 + 1).Range.Bold = 1; // Делаем текст жирным
+
+
+
+
+            // Заполняем данные
+            for (int i = 0; i < rowCount; i++)
+            {
+                table.Cell(i + 2, 1).Range.Text = ((SelectRailWayCar_Result)dg_Train.Items[i]).ИдентификационныйНомер.ToString();
+                table.Cell(i + 2, 2).Range.Text = ((SelectRailWayCar_Result)dg_Train.Items[i]).Наименование.ToString();
+                table.Cell(i + 2, 3).Range.Text = ((SelectRailWayCar_Result)dg_Train.Items[i]).Статус.ToString();
+            }
+
+            // Показываем документ
+            wordApp.Visible = true;
+
+            // Освобождаем ресурсы
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);
         }
     }
 }

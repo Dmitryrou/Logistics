@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;//Добавили пространнство имен регулярные выражения 
+using Application = Microsoft.Office.Interop.Word.Application;
+using Paragraph = Microsoft.Office.Interop.Word.Paragraph;
+using Table = Microsoft.Office.Interop.Word.Table;
+using Page = System.Windows.Controls.Page;
 
 namespace Logistics
 {
@@ -86,6 +90,58 @@ namespace Logistics
             txb_quantity.ToolTip = null;
             cmb_Storage.ToolTip = null;
             cmb_Storage.Background = Brushes.Transparent;
+        }
+
+        private void Button_Click_Word(object sender, RoutedEventArgs e)
+        {
+            var wordApp = new Application();
+            var document = wordApp.Documents.Add();
+
+            // Добавляем заголовок
+            Paragraph paragraph = document.Content.Paragraphs.Add();
+            paragraph.Range.Text = "Отчет по остаткам на складах " + DateTime.Now.ToString();
+            paragraph.Range.InsertParagraphAfter();
+
+            // Создаем таблицу в Word
+            int rowCount = 1;
+            int columnCount = 6;
+
+            Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
+            table.Borders.Enable = 1; // Включаем границы таблицы
+
+            // Заполняем заголовки столбцов
+
+            table.Cell(1, 0 + 1).Range.Text = tbx_1.Text;
+            table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 1 + 1).Range.Text = tbx_2.Text;
+            table.Cell(1, 1 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 2 + 1).Range.Text = tbx_3.Text;
+            table.Cell(1, 2 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 3 + 1).Range.Text = tbx_4.Text;
+            table.Cell(1, 3 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 4 + 1).Range.Text = tbx_5.Text;
+            table.Cell(1, 4 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 5 + 1).Range.Text = tbx_6.Text;
+            table.Cell(1, 5 + 1).Range.Bold = 1; // Делаем текст жирным
+
+            // Заполняем данные
+            for (int i = 0; i < rowCount; i++)
+            {
+                table.Cell(i + 2, 1).Range.Text = tbx_11.Text;
+                table.Cell(i + 2, 2).Range.Text = tbx_22.Text;
+                table.Cell(i + 2, 3).Range.Text = tbx_33.Text;
+                table.Cell(i + 2, 4).Range.Text = tbx_44.Text;
+                table.Cell(i + 2, 5).Range.Text = tbx_55.Text;
+                table.Cell(i + 2, 6).Range.Text = tbx_66.Text;
+
+            }
+
+            // Показываем документ
+            wordApp.Visible = true;
+
+            // Освобождаем ресурсы
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);
         }
     }
 }

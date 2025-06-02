@@ -7,6 +7,48 @@
       mc:Ignorable="d" 
         d:DesignHeight="740" d:DesignWidth="1000"
   Title="StorageAc" Loaded="Button_Click_Refresh">
+    <Page.Resources>
+        <Style x:Key="DefBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFDCDCDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#FF666666"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+    BorderThickness="{TemplateBinding BorderThickness}"
+    Padding="{TemplateBinding Padding}" 
+    BorderBrush="{TemplateBinding BorderBrush}" 
+    CornerRadius="1" 
+    Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--Some setters here-->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="White">
         <StackPanel Margin="15">
             <Grid>
@@ -21,11 +63,13 @@
                 </Grid.RowDefinitions>
                 <ComboBox Margin="5" Grid.Row="1" Name="cmb_Storage"></ComboBox>
                 <TextBox Grid.Column = "1" Margin="5" Grid.Row="1" Name="txb_quantity"></TextBox>
-                <Button Grid.Column = "2" Margin="5" Grid.Row="1" Click="Button_Click_Insert">Изменить</Button>
+                <Button Style="{StaticResource DefBtn}" Grid.Column = "2" Margin="5" Grid.Row="1" Click="Button_Click_Insert">Изменить</Button>
                 <TextBlock Margin="5">Выберите номенклатуру</TextBlock>
                 <TextBlock Grid.Column = "1" Margin="5">Введите нужное количество угля</TextBlock>
             </Grid>
-            <Button Grid.Column = "4" Margin="5" Click="Button_Click_Refresh">Обновить график</Button>
+            <Button Style="{StaticResource DefBtn}" Grid.Column = "4" Margin="5" Click="Button_Click_Refresh">Обновить график</Button>
+            <Button Style="{StaticResource DefBtn}" Grid.Column = "4" Margin="5" Click="Button_Click_Word">Экспорт в Ворд</Button>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -8,7 +8,48 @@
       Loaded="Page_Loaded"
       d:DesignHeight="740" d:DesignWidth="1000"
       Title="Отправка составов">
-
+    <Page.Resources>
+        <Style x:Key="DefBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFDCDCDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#FF666666"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+        BorderThickness="{TemplateBinding BorderThickness}"
+        Padding="{TemplateBinding Padding}" 
+        BorderBrush="{TemplateBinding BorderBrush}" 
+        CornerRadius="1" 
+        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--Some setters here-->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="White">
         <StackPanel>
             <Grid Margin="5">
@@ -25,13 +66,20 @@
                 <ComboBox Margin="5" Grid.Column="0" Grid.Row="1" Name="cmb_RailwayCar"></ComboBox>
                 <ComboBox Margin="5" Grid.Column="2" Grid.Row="1" Name="cmb_StationDistination"></ComboBox>
             </Grid>
-            <Grid Margin="5">
+            <Grid Margin="5 0 5 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Margin="5" Click="Button_Click_Add">Отправить состав</Button>
-                <Button Margin="5" Grid.Column="1" Click="Button_Click_Remove">Удалить состав</Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource DefBtn}" Margin="5" Click="Button_Click_Add">Отправить состав</Button>
+                <Button Style="{StaticResource DefBtn}" Margin="5" Grid.Column="1" Click="Button_Click_Remove">Удалить состав</Button>
+                <Button Style="{StaticResource DefBtn}" Margin="5" Grid.Column="2" Click="Button_Click_Word">Экспорт в Ворд</Button>
             </Grid>
             <Grid Margin="10">
                 <DataGrid Name="dg_RailwaySending" >

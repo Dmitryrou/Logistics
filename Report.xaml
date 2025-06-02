@@ -1,13 +1,13 @@
-﻿<Page x:Class="Logistics.CreateTrain"
+﻿<Page x:Class="Logistics.Report"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Logistics"
       mc:Ignorable="d" 
-      Loaded="Page_Loaded"
-      d:DesignHeight="740" d:DesignWidth="1000"
-      Title="Создание поезда">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Report">
+
     <Page.Resources>
         <Style x:Key="DefBtn" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#FFF5F5F5"/>
@@ -24,18 +24,18 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="border" 
-            BorderThickness="{TemplateBinding BorderThickness}"
-            Padding="{TemplateBinding Padding}" 
-            BorderBrush="{TemplateBinding BorderBrush}" 
-            CornerRadius="1" 
-            Background="{TemplateBinding Background}">
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        CornerRadius="1" 
+                        Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <!--TODO: Set the right colors-->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
                                 <Setter Property="Foreground" Value="#FF4788c8" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -50,30 +50,10 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid Background="White">
-        <StackPanel Margin="15">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBox Margin="5" Grid.Row="1" Grid.Column="0" Name="tbx_name"></TextBox>
-                <Button Grid.Column = "1" Margin="5" Grid.Row="0" Click="Button_Click_Add" Style="{StaticResource DefBtn}">Добавить</Button>
-                <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="0" HorizontalAlignment="Center">Введите название поезда</TextBlock>
-                <Button Style="{StaticResource DefBtn}" Grid.Column = "1" Margin="5" Grid.Row="1"  Click="Button_Click_Del">Удалить выбранный вагон</Button>
-                <Button Style="{StaticResource DefBtn}" Grid.Column = "2" Margin="5" Grid.Row="1"  Click="Button_Click_Word">Экспорт в Ворд</Button>
-            </Grid>
-            <Grid Margin="10">
-                <DataGrid x:Name="dg_Train">
 
-                </DataGrid>
-            </Grid>
+    <Grid Background="White">
+        <StackPanel>
+            <Button Style="{StaticResource DefBtn}" Content="Нажми меня" />
         </StackPanel>
     </Grid>
 </Page>

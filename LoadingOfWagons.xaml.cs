@@ -13,6 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Office.Interop.Word;
+using Application = Microsoft.Office.Interop.Word.Application;
+using Paragraph = Microsoft.Office.Interop.Word.Paragraph;
+using Table = Microsoft.Office.Interop.Word.Table;
+using Page = System.Windows.Controls.Page;
+
 
 namespace Logistics
 {
@@ -121,6 +127,62 @@ namespace Logistics
             {
                 MessageBox.Show("Выберете запись");
             }
+        }
+
+        private void Button_Click_Word(object sender, RoutedEventArgs e)
+        {
+            var wordApp = new Application();
+            var document = wordApp.Documents.Add();
+
+            // Добавляем заголовок
+            Paragraph paragraph = document.Content.Paragraphs.Add();
+            paragraph.Range.Text = "Отчет по загруженным вагонам на " + DateTime.Now.ToString();
+            paragraph.Range.InsertParagraphAfter();
+
+            // Создаем таблицу в Word
+            int rowCount = dg_Wagons2.Items.Count;
+            int columnCount = 7;
+
+            Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
+            table.Borders.Enable = 1; // Включаем границы таблицы
+
+            // Заполняем заголовки столбцов
+
+            table.Cell(1, 0 + 1).Range.Text = "Номер";
+            table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 1 + 1).Range.Text = "Нетто";
+            table.Cell(1, 1 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 2 + 1).Range.Text = "Вместимость";
+            table.Cell(1, 2 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 3 + 1).Range.Text = "Дата";
+            table.Cell(1, 3 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 4 + 1).Range.Text = "ВесВагона";
+            table.Cell(1, 4 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 5 + 1).Range.Text = "Фамилия";
+            table.Cell(1, 5 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 6 + 1).Range.Text = "Имя";
+            table.Cell(1, 6 + 1).Range.Bold = 1; // Делаем текст жирным
+
+
+
+            // Заполняем данные
+            for (int i = 0; i < rowCount; i++)
+            {
+                table.Cell(i + 2, 1).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Номер.ToString();
+                table.Cell(i + 2, 2).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Нетто.ToString();
+                table.Cell(i + 2, 3).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Вместимость.ToString();
+                table.Cell(i + 2, 4).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Дата.ToString();
+                table.Cell(i + 2, 5).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).ВесВагона.ToString();
+                table.Cell(i + 2, 6).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Фамилия.ToString();
+                table.Cell(i + 2, 7).Range.Text = ((SelectRailWayLoading_Result)dg_Wagons2.Items[i]).Имя.ToString();
+            }
+
+            // Показываем документ
+            wordApp.Visible = true;
+
+            // Освобождаем ресурсы
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);
         }
     }
 }

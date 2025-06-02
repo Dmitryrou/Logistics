@@ -8,10 +8,50 @@
       d:DesignHeight="740" d:DesignWidth="1000"
       Title="AcceptanceOfWagon"
       Loaded="Page_Loaded_AcceptanceOfWagon">
-
+    <Page.Resources>
+        <Style x:Key="DefBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFDCDCDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#FF666666"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                CornerRadius="1" 
+                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--Some setters here-->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="White">
         <StackPanel Margin="10">
-            <TextBlock Text="Прием и регистрация вагонов" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="22" Margin="10"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -32,9 +72,10 @@
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_id_railway"/>
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_tare"/>
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_capacity"/>
-                <Button Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Check"/>
-                <Button Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Add"/>
-                <Button Content="Удалить запись" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Del"/>
+                <Button Style="{StaticResource DefBtn}" Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Check"/>
+                <Button Style="{StaticResource DefBtn}" Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Add"/>
+                <Button Style="{StaticResource DefBtn}" Content="Удалить запись" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Del"/>
+                <Button Style="{StaticResource DefBtn}" Content="Экспорт в Ворд" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Word"/>
             </Grid>
             <Grid Margin="10">
                 <DataGrid x:Name="dg_Wagons">

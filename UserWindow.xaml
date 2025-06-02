@@ -6,15 +6,57 @@
         xmlns:local="clr-namespace:Logistics"
         mc:Ignorable="d"
         Title="Главная страница" Width="1360" Height="768" Loaded="Window_Loaded" >
+    <Window.Resources>
+        <Style x:Key="DefBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFDCDCDC"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Foreground" Value="#FF666666"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                CornerRadius="1" 
+                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--TODO: Set the right colors-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
+                                <Setter Property="Foreground" Value="#FF4788c8" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--Some setters here-->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1290"/>
+                    <ColumnDefinition Width="1230"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button HorizontalAlignment="Right" Grid.Column="1" Click="Button_Click_Exit">Выйти</Button>
-                <TextBlock Margin="" HorizontalAlignment="Right" FontSize="14" Grid.Column="0" Name="fio_tbx">FIO</TextBlock>
+                <Button Margin="10" HorizontalAlignment="Right" Grid.Column="1" Click="Button_Click_Exit" Style="{StaticResource DefBtn}">Выйти</Button>
+                <TextBlock Margin="10" HorizontalAlignment="Right" FontSize="14" Grid.Column="0" Name="fio_tbx" VerticalAlignment="Center" >FIO</TextBlock>
             </Grid>
 
             <Grid>
@@ -23,13 +65,13 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="15">
-                    <Button Name="btn_storage" Content="Склад" Margin="15" Click="btn_storage_Click"/>
-                    <Button Name="btn_Report" Content="Список отчетов" Margin="15" Click="btn_Report_Click"/>
-                    <Button Name="btn_acceptance" Content="Приемка вагонов" Margin="15" Click="btn_acceptance_Click"/>
-                    <Button Name="btn_loading" Content="Погрузка вагонов" Margin="15" Click="btn_loading_Click"/>
-                    <Button Name="btn_Cteate_train" Content="Список поездов" Margin="15" Click="btn_Create_train_Click"/>
-                    <Button Name="btn_Create_sost" Content="Создание составов" Margin="15" Click="btn_CreateSost_Click"/>
-                    <Button Name="btn_dispatch" Content="Отправка составов" Margin="15" Click="btn_dispatch_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_storage" Content="Склад" Margin="15" Click="btn_storage_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_Report" Content="Список отчетов" Margin="15" Click="btn_Report_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_acceptance" Content="Приемка вагонов" Margin="15" Click="btn_acceptance_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_loading" Content="Погрузка вагонов" Margin="15" Click="btn_loading_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_Cteate_train" Content="Список поездов" Margin="15" Click="btn_Create_train_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_Create_sost" Content="Создание составов" Margin="15" Click="btn_CreateSost_Click"/>
+                    <Button Style="{StaticResource DefBtn}" Name="btn_dispatch" Content="Отправка составов" Margin="15" Click="btn_dispatch_Click"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="10">
                     <Frame Name="frm_HomePage" Height="700" Width="1000" Margin="5"/>

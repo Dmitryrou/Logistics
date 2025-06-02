@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Application = Microsoft.Office.Interop.Word.Application;
+using Paragraph = Microsoft.Office.Interop.Word.Paragraph;
+using Table = Microsoft.Office.Interop.Word.Table;
+using Page = System.Windows.Controls.Page;
 
 namespace Logistics
 {
@@ -101,6 +105,54 @@ namespace Logistics
             {
                 cmb_train_select.Items.Add(railway_Cars_Search[i].Name_Car);
             }
+        }
+
+        private void Button_Click_Word(object sender, RoutedEventArgs e)
+        {
+            var wordApp = new Application();
+            var document = wordApp.Documents.Add();
+
+            // Добавляем заголовок
+            Paragraph paragraph = document.Content.Paragraphs.Add();
+            paragraph.Range.Text = "Отчет по вагонам в составе на " + DateTime.Now.ToString();
+            paragraph.Range.InsertParagraphAfter();
+
+            // Создаем таблицу в Word
+            int rowCount = dg_Wagons3.Items.Count;
+            int columnCount = 5;
+
+            Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
+            table.Borders.Enable = 1; // Включаем границы таблицы
+
+            // Заполняем заголовки столбцов
+
+            table.Cell(1, 0 + 1).Range.Text = "НомерЗаписи";
+            table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 1 + 1).Range.Text = "Поезд";
+            table.Cell(1, 1 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 2 + 1).Range.Text = "НомерПоезда";
+            table.Cell(1, 2 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 3 + 1).Range.Text = "Вагон";
+            table.Cell(1, 3 + 1).Range.Bold = 1; // Делаем текст жирным
+            table.Cell(1, 4 + 1).Range.Text = "Нетто";
+            table.Cell(1, 4 + 1).Range.Bold = 1; // Делаем текст жирным
+
+            // Заполняем данные
+            for (int i = 0; i < rowCount; i++)
+            {
+                table.Cell(i + 2, 1).Range.Text = ((SelectRailWayDicpathch_Result)dg_Wagons3.Items[i]).НомерЗаписи.ToString();
+                table.Cell(i + 2, 2).Range.Text = ((SelectRailWayDicpathch_Result)dg_Wagons3.Items[i]).Поезд.ToString();
+                table.Cell(i + 2, 3).Range.Text = ((SelectRailWayDicpathch_Result)dg_Wagons3.Items[i]).НомерПоезда.ToString();
+                table.Cell(i + 2, 4).Range.Text = ((SelectRailWayDicpathch_Result)dg_Wagons3.Items[i]).Вагон.ToString();
+                table.Cell(i + 2, 5).Range.Text = ((SelectRailWayDicpathch_Result)dg_Wagons3.Items[i]).Нетто.ToString();
+            }
+
+            // Показываем документ
+            wordApp.Visible = true;
+
+            // Освобождаем ресурсы
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);
         }
     }
 }

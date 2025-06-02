@@ -74,7 +74,7 @@ namespace Logistics
 
         private void btn_Report_Click(object sender, RoutedEventArgs e)
         {
-
+            frm_HomePage.NavigationService.Navigate(new CreateTrain(User));
         }
     }
 }
