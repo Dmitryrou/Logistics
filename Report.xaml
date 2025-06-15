@@ -24,18 +24,18 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="border" 
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Padding="{TemplateBinding Padding}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        CornerRadius="1" 
-                        Background="{TemplateBinding Background}">
+BorderThickness="{TemplateBinding BorderThickness}"
+Padding="{TemplateBinding Padding}" 
+BorderBrush="{TemplateBinding BorderBrush}" 
+CornerRadius="1" 
+Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <!--TODO: Set the right colors-->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightSteelBlue" />
                                 <Setter Property="Foreground" Value="#FF4788c8" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -51,9 +51,26 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="White">
+    <Grid Margin="5" Background="White">
         <StackPanel>
-            <Button Style="{StaticResource DefBtn}" Content="Нажми меня" />
+            <TextBlock  Margin="5 0 0 0">Выберите период для отчета</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">-</TextBlock>
+                <DatePicker Margin="5" Width="100" Height="50" ></DatePicker>
+                <DatePicker Margin="5" Grid.Column="2"  Width="100" Height="50" HorizontalAlignment="Left"></DatePicker>
+            </Grid>
+            <Button Style="{StaticResource DefBtn}" Margin="5">Отчет по пустым вагонам</Button>
+            <Button Style="{StaticResource DefBtn}" Margin="5">Отчет по загруженным вагонам</Button>
+            <Button Style="{StaticResource DefBtn}" Margin="5">Отчет по отправленным вагонам</Button>
         </StackPanel>
     </Grid>
 </Page>

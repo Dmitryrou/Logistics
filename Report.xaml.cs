@@ -20,7 +20,7 @@ namespace Logistics
     /// </summary>
     public partial class Report : Page
     {
-        public Report()
+        public Report(User user)
         {
             InitializeComponent();
         }

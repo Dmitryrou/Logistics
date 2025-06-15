@@ -43,7 +43,6 @@ namespace Logistics
             uk_koksEntities2.GetContext().SaveChanges();
             Page_Loaded(sender, e);
         }
-
         private void Button_Click_Del(object sender, RoutedEventArgs e)
         {
             if (dg_Train.SelectedItem != null)
@@ -80,31 +79,22 @@ namespace Logistics
         {
             var wordApp = new Application();
             var document = wordApp.Documents.Add();
-
             // Добавляем заголовок
             Paragraph paragraph = document.Content.Paragraphs.Add();
             paragraph.Range.Text = "Отчет по поездам на " + DateTime.Now.ToString();
             paragraph.Range.InsertParagraphAfter();
-
             // Создаем таблицу в Word
             int rowCount = dg_Train.Items.Count;
             int columnCount = 3;
-
             Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
             table.Borders.Enable = 1; // Включаем границы таблицы
-
             // Заполняем заголовки столбцов
-
             table.Cell(1, 0 + 1).Range.Text = "Идентификационный Номер";
             table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
             table.Cell(1, 1 + 1).Range.Text = "Наименование";
             table.Cell(1, 1 + 1).Range.Bold = 1; // Делаем текст жирным
             table.Cell(1, 2 + 1).Range.Text = "Статус";
             table.Cell(1, 2 + 1).Range.Bold = 1; // Делаем текст жирным
-
-
-
-
             // Заполняем данные
             for (int i = 0; i < rowCount; i++)
             {
@@ -112,10 +102,8 @@ namespace Logistics
                 table.Cell(i + 2, 2).Range.Text = ((SelectRailWayCar_Result)dg_Train.Items[i]).Наименование.ToString();
                 table.Cell(i + 2, 3).Range.Text = ((SelectRailWayCar_Result)dg_Train.Items[i]).Статус.ToString();
             }
-
             // Показываем документ
             wordApp.Visible = true;
-
             // Освобождаем ресурсы
             System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);

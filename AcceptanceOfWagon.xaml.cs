@@ -39,23 +39,23 @@ namespace Logistics
 
         private void Page_Loaded_AcceptanceOfWagon(object sender, RoutedEventArgs e)
         {
-            dg_Wagons.ItemsSource = uk_koksEntities2.GetContext().SelectRailWay(1);
+            dg_Wagons.ItemsSource = uk_koksEntities2.GetContext().SelectRailWay(1); //Заполнение датаГрид из хранимаой процедуры
         }
 
         private void Button_Click_Check(object sender, RoutedEventArgs e)
         {
             tbx_id_railway.Background = Brushes.Transparent;
             tbx_id_railway.ToolTip = "";
-            string shablonName = @"^[1-9]\d{0,6}$";
+            string shablonName = @"^[1-9]\d{0,6}$";// создание шаблона регклярного выражения 
             Regex myRegex = new Regex(shablonName);
             if (myRegex.IsMatch(tbx_id_railway.Text))
             {
-                bool result = checkRailway();
-                if (result == true)
+                bool result = checkRailway();//Проверка вагона 
+                if (result == true)//Если проверка показала что вагон уде существует
                 {
                     Page_Loaded_AcceptanceOfWagon(sender, e);
                 }
-                else
+                else//Если проверка показала что вагона не существует
                 {
 
                     MessageBox.Show("Данного вагона не существует в базе, заполните остальные поля и нажмите на кнопку 'Записать' ",
@@ -64,7 +64,7 @@ namespace Logistics
                         MessageBoxImage.Information);
                 }
             }
-            else
+            else//Если регулярное выражение не сработало
             {
                 tbx_id_railway.Background = Brushes.Red;
                 tbx_id_railway.ToolTip = "Введите в поле номер вагона только цифры";
@@ -78,14 +78,14 @@ namespace Logistics
             int id = 0;
             int tareWeight = 0;
             int capacity = 0;
-            string shablonName = @"^[1-9]\d{0,6}$";
+            string shablonName = @"^[1-9]\d{0,6}$";//Создание шаблона
             Regex myRegex = new Regex(shablonName);
             if (myRegex.IsMatch(tbx_id_railway.Text))
             {
-                bool resultCheck = checkRailway();
-                if (resultCheck == false)
+                bool resultCheck = checkRailway();//Проверка вагона перед записью
+                if (resultCheck == false)//Если поезда не существует
                 {
-                    id = Convert.ToInt32(tbx_id_railway.Text.Trim());
+                    id = Convert.ToInt32(tbx_id_railway.Text.Trim());//номер вагона которое ввел пользователь
                     if (myRegex.IsMatch(tbx_tare.Text))
                     {
                         tbx_tare.Background = Brushes.Transparent;
@@ -110,8 +110,7 @@ namespace Logistics
                     }
                     if (tareWeight != 0 & capacity != 0)
                     {
-
-                        Railway railway = new Railway()
+                        Railway railway = new Railway()//Создание переменной которая будет добавлена в БД
                         {
                             id_Railway = id,
                             id_Status_Car = 1,
@@ -122,9 +121,9 @@ namespace Logistics
                             Railway_Railway_Car1 = null,
                             Status_Car = null
                         };
-                        uk_koksEntities2.GetContext().Railway.Add(railway);
-                        uk_koksEntities2.GetContext().SaveChanges();
-                        Page_Loaded_AcceptanceOfWagon(sender, e);
+                        uk_koksEntities2.GetContext().Railway.Add(railway);//Добавление в БД
+                        uk_koksEntities2.GetContext().SaveChanges();//Сохранение данных
+                        Page_Loaded_AcceptanceOfWagon(sender, e);//Обновление ДатаГрид
                         MessageBox.Show("Данного вагона записан в базу как пустой",
                             "Запись сохранена",
                             MessageBoxButton.OK,
@@ -141,13 +140,15 @@ namespace Logistics
 
         private void Button_Click_Del(object sender, RoutedEventArgs e)
         {
-            if (dg_Wagons.SelectedItem != null)
+            if (dg_Wagons.SelectedItem != null)//Если выбранн  элемент в датаГрид
             {
-                var selectedItem = (SelectRailWay_Result)dg_Wagons.SelectedItem;
-                Railway railway = uk_koksEntities2.GetContext().Railway.Where(item => item.id_Railway == selectedItem.Номер).FirstOrDefault();
-                uk_koksEntities2.GetContext().Railway.Remove(railway);
+                var selectedItem = (SelectRailWay_Result)dg_Wagons.SelectedItem;//Переменная для выделенной строки
+                Railway railway = uk_koksEntities2.GetContext()
+                                    .Railway.Where(item => item.id_Railway == selectedItem.Номер)
+                                    .FirstOrDefault();//Переменная которая принимает строку с нужным вагонов и которую требуется удалить
+                uk_koksEntities2.GetContext().Railway.Remove(railway);//Удаляем переменную
                 uk_koksEntities2.GetContext().SaveChanges() ;
-                Page_Loaded_AcceptanceOfWagon(sender,e);
+                Page_Loaded_AcceptanceOfWagon(sender,e);//Обновляем список
             }
             else
             {
@@ -157,9 +158,9 @@ namespace Logistics
         public bool checkRailway()
         {
             bool result = false;
-            int id = Convert.ToInt32(tbx_id_railway.Text.Trim());
-            Railway railway = uk_koksEntities2.GetContext().Railway.Where(item => item.id_Railway == id).FirstOrDefault();
-            if (railway != null && railway.id_Status_Car == 1)
+            int id = Convert.ToInt32(tbx_id_railway.Text.Trim());//Принимаем номер вагона для проверки
+            Railway railway = uk_koksEntities2.GetContext().Railway.Where(item => item.id_Railway == id).FirstOrDefault();//Пытаемся найти вагон
+            if (railway != null && railway.id_Status_Car == 1)//Если вагон существует и его стутус пустой
             {
                 MessageBox.Show("Данный вагон уже есть в списке пустых вагонов",
                     "Проверка завершена",
@@ -167,7 +168,7 @@ namespace Logistics
                     MessageBoxImage.Information);
                 result = true;
             }
-            else if (railway != null && railway.id_Status_Car != 1)
+            else if (railway != null && railway.id_Status_Car != 1) //Если вагон существует и его статус не пустой
             {
                 railway.id_Status_Car = 1;
                 uk_koksEntities2.GetContext().SaveChanges();

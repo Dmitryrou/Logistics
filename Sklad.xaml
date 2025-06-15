@@ -69,7 +69,6 @@
             </Grid>
             <Button Style="{StaticResource DefBtn}" Grid.Column = "4" Margin="5" Click="Button_Click_Refresh">Обновить график</Button>
             <Button Style="{StaticResource DefBtn}" Grid.Column = "4" Margin="5" Click="Button_Click_Word">Экспорт в Ворд</Button>
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

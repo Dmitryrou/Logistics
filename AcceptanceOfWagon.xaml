@@ -72,10 +72,14 @@
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_id_railway"/>
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_tare"/>
                 <TextBox  Margin="10" Width="130" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="tbx_capacity"/>
-                <Button Style="{StaticResource DefBtn}" Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Check"/>
-                <Button Style="{StaticResource DefBtn}" Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Add"/>
-                <Button Style="{StaticResource DefBtn}" Content="Удалить запись" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Del"/>
-                <Button Style="{StaticResource DefBtn}" Content="Экспорт в Ворд" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Click="Button_Click_Word"/>
+                <Button Style="{StaticResource DefBtn}" Content="Проверить вагон" Margin="10"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="140" Click="Button_Click_Check"/>
+                <Button Style="{StaticResource DefBtn}" Content="Записать" Margin="10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="140" Click="Button_Click_Add"/>
+                <Button Style="{StaticResource DefBtn}" Content="Удалить запись" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="140" Click="Button_Click_Del"/>
+                <Button Style="{StaticResource DefBtn}" Content="Экспорт в Ворд" Margin="10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="140" Click="Button_Click_Word"/>
             </Grid>
             <Grid Margin="10">
                 <DataGrid x:Name="dg_Wagons">

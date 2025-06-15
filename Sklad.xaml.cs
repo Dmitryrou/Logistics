@@ -35,21 +35,24 @@ namespace Logistics
 
         private void Button_Click_Insert(object sender, RoutedEventArgs e)
         {
-            backgroundTransparent();
-            string shablonName = @"^[1-9]\d{0,6}$";
+            backgroundTransparent();//Окраска текстБокса в прозрачный 
+            string shablonName = @"^[1-9]\d{0,6}$";//Создание шаблона регулярного выражения
             Regex myRegex = new Regex(shablonName);
-            if (myRegex.IsMatch(txb_quantity.Text) && cmb_Storage.SelectedItem != null)
+            if (myRegex.IsMatch(txb_quantity.Text) && cmb_Storage.SelectedIndex != -1)//Проверка вводимого текста
             {
-                
-                    Nomenclature nomenclature = uk_koksEntities2.GetContext().Nomenclature.Where(item => item.Name == cmb_Storage.SelectedItem.ToString()).FirstOrDefault();
-                    Storage_Accounting storage = uk_koksEntities2.GetContext().Storage_Accounting.Where(item => item.id_Nomenclature == nomenclature.id_Nomenclature).FirstOrDefault();
-                    storage.quantity = Convert.ToInt32(txb_quantity.Text);
-                    uk_koksEntities2.GetContext().SaveChanges();
-                    Button_Click_Refresh(sender, e);
+                    Nomenclature nomenclature = uk_koksEntities2.GetContext().
+                                                Nomenclature.Where(item => item.Name == cmb_Storage.SelectedItem.ToString())
+                                                .FirstOrDefault();//создание переменной той номеклатуры которую выбрал пользователь
+                    Storage_Accounting storage = uk_koksEntities2.GetContext().
+                                                Storage_Accounting.Where(item => item.id_Nomenclature == nomenclature.id_Nomenclature)
+                                                .FirstOrDefault();//создание переменной которую нужно изменить
+                    storage.quantity = Convert.ToInt32(txb_quantity.Text);//изменение переменной
+                    uk_koksEntities2.GetContext().SaveChanges();//сохранение данных
+                Button_Click_Refresh(sender, e);//Обновление данных на форме
             }
             else
             {
-                if(cmb_Storage.SelectedItem == null)
+                if(cmb_Storage.SelectedIndex != -1)
                 {
                     MessageBox.Show("Выберете номенклатуру");
                     cmb_Storage.Background = Brushes.Red;
@@ -96,21 +99,16 @@ namespace Logistics
         {
             var wordApp = new Application();
             var document = wordApp.Documents.Add();
-
             // Добавляем заголовок
             Paragraph paragraph = document.Content.Paragraphs.Add();
             paragraph.Range.Text = "Отчет по остаткам на складах " + DateTime.Now.ToString();
             paragraph.Range.InsertParagraphAfter();
-
             // Создаем таблицу в Word
             int rowCount = 1;
             int columnCount = 6;
-
             Table table = document.Tables.Add(paragraph.Range, rowCount + 1, columnCount);
             table.Borders.Enable = 1; // Включаем границы таблицы
-
             // Заполняем заголовки столбцов
-
             table.Cell(1, 0 + 1).Range.Text = tbx_1.Text;
             table.Cell(1, 0 + 1).Range.Bold = 1; // Делаем текст жирным
             table.Cell(1, 1 + 1).Range.Text = tbx_2.Text;
@@ -123,7 +121,6 @@ namespace Logistics
             table.Cell(1, 4 + 1).Range.Bold = 1; // Делаем текст жирным
             table.Cell(1, 5 + 1).Range.Text = tbx_6.Text;
             table.Cell(1, 5 + 1).Range.Bold = 1; // Делаем текст жирным
-
             // Заполняем данные
             for (int i = 0; i < rowCount; i++)
             {
@@ -133,12 +130,9 @@ namespace Logistics
                 table.Cell(i + 2, 4).Range.Text = tbx_44.Text;
                 table.Cell(i + 2, 5).Range.Text = tbx_55.Text;
                 table.Cell(i + 2, 6).Range.Text = tbx_66.Text;
-
             }
-
             // Показываем документ
             wordApp.Visible = true;
-
             // Освобождаем ресурсы
             System.Runtime.InteropServices.Marshal.ReleaseComObject(document);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(wordApp);

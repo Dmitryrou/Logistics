@@ -30,51 +30,42 @@ namespace Logistics
         {
             Close();
         }
-
         private void btn_storage_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new Sklad(User));
         }
-
         private void btn_waybill_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new WayBill(User));
         }
-
         private void btn_acceptance_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new AcceptanceOfWagon(User));
         }
-
         private void btn_loading_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new LoadingOfWagons(User));
         }
-
         private void btn_CreateSost_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new CreateOfSostav(User));
         }
-
         private void btn_dispatch_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new DispatchOfWagons(User));
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             string fio = User.FirstName + " " + User.Name + " " + User.LastName;
             fio_tbx.Text = fio;
         }
-
         private void btn_Create_train_Click(object sender, RoutedEventArgs e)
         {
             frm_HomePage.NavigationService.Navigate(new CreateTrain(User));
         }
-
         private void btn_Report_Click(object sender, RoutedEventArgs e)
         {
-            frm_HomePage.NavigationService.Navigate(new CreateTrain(User));
+            frm_HomePage.NavigationService.Navigate(new Report(User));
         }
     }
 }

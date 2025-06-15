@@ -35,26 +35,36 @@ namespace Logistics
 
         private void Button_Click_add(object sender, RoutedEventArgs e)
         {
-            string name = cmb_train_add.Text.Trim();
-            Railway_Car railway_Car = uk_koksEntities2.GetContext().Railway_Car.Where(item => item.Name_Car == name).FirstOrDefault();
-            Railway_Railway_Car railway_Railway_Car = new Railway_Railway_Car()
+            if (cmb_railway.SelectedIndex != -1 &&
+                cmb_train_add.SelectedIndex != -1 &&
+                cmb_train_select.SelectedIndex != -1)
             {
-                id_Railway = Convert.ToInt32(cmb_railway.SelectedItem.ToString()),
-                id_Railway_Car = railway_Car.id_Railway_Car,
-                Railway = null,
-                Railway1 = null,
-                Railway_Car = null
-            };
-            uk_koksEntities2.GetContext().Railway_Railway_Car.Add(railway_Railway_Car);
-            uk_koksEntities2.GetContext().SaveChanges();
-            Button_Click_Refresh(sender, e);
-            Page_Loaded(sender, e);
+
+                string name = cmb_train_add.Text.Trim();
+                Railway_Car railway_Car = uk_koksEntities2.GetContext().Railway_Car.Where(item => item.Name_Car == name).FirstOrDefault();
+                Railway_Railway_Car railway_Railway_Car = new Railway_Railway_Car()
+                {
+                    id_Railway = Convert.ToInt32(cmb_railway.SelectedItem.ToString()),
+                    id_Railway_Car = railway_Car.id_Railway_Car,
+                    Railway = null,
+                    Railway1 = null,
+                    Railway_Car = null
+                };
+                uk_koksEntities2.GetContext().Railway_Railway_Car.Add(railway_Railway_Car);
+                uk_koksEntities2.GetContext().SaveChanges();
+                Button_Click_Refresh(sender, e);
+                Page_Loaded(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Все поля должны быть заполненны","Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         } 
 
         private void Button_Click_Refresh(object sender, RoutedEventArgs e)
         {
             
-            if(cmb_train_select.SelectedItem != null)
+            if(cmb_train_select.SelectedIndex != -1)
             {
                 string name = cmb_train_select.Text.Trim();
                 Railway_Car railway_Car = uk_koksEntities2.GetContext().Railway_Car.Where(item => item.Name_Car == name).FirstOrDefault();
@@ -63,7 +73,7 @@ namespace Logistics
             }
             else
             {
-                MessageBox.Show("Выберите состав для отображения списка");
+                MessageBox.Show("Выберите состав для отображения списка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             
         }
@@ -80,7 +90,7 @@ namespace Logistics
             }
             else
             {
-                MessageBox.Show("Выберете запись");
+                MessageBox.Show("Выберете запись", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
